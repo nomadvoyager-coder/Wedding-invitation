@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Imran &amp; Ayesha — Our Wedding Celebration</title>
+<meta name="description" content="Join us as we celebrate the Milad, Haldi, Barat, Nikah and Walima of Imran and Ayesha.">
+
+<!--
+  ===========================================================================
+  HOW TO PERSONALIZE THIS FILE
+  Every spot that still needs your real information is marked with an
+  inline comment or code comment containing a [[TAG]], right next to a
+  working dummy value so the page is fully functional as a preview.
+  From a terminal in this folder, run:      grep -n "\[\[" index.html
+  ...to get a line-by-line list of every tag to replace.
+
+  The display font "Maellen" is licensed separately and not included here.
+  Create a "fonts" folder next to this file containing Maellen.woff2 and
+  the @font-face below will pick it up automatically. Until then, the page
+  gracefully falls back to an italic Playfair Display / Georgia.
+  ===========================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================================
+   0. RESET + TOKENS
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+:root {
+  /* --- 3.1 color palette (final) --- */
+  --color-bg: #FDF8F0;
+  --color-surface: #F7EFE1;
+  --color-accent: #C99A54;
+  --color-accent-deep: #B98B4E;
+  --color-text: #3A2E2A;
+  --color-text-muted: #6B5B4F;
+
+  /* --- 3.2 per-ceremony tints --- */
+  --tint-milad:  #F3E9DE;
+  --tint-haldi:  #F6E3B8;
+  --tint-barat:  #DCEDEA;
+  --tint-nikah:  #E4EEE1;
+  --tint-walima: #F5E0CE;
+
+  /* --- motion durations, collapsed under reduced-motion below --- */
+  --dur-curtain: 750ms;
+  --dur-tint: 500ms;
+  --dur-fade: 350ms;
+  --ease-out: cubic-bezier(.16,.8,.28,1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-curtain: 1ms; --dur-tint: 1ms; --dur-fade: 1ms; }
+  html { scroll-behavior: auto !important; }
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'EB Garamond', Georgia, serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   1. TYPE ROLES
+   ========================================================================== */
+
+/* 3.3 Display / cursive — names, ceremony headings.
+   Fallback tier is italic per spec; once you add the real Maellen.woff2,
+   feel free to drop the italic if it looks odd on the script face itself. */
+@font-face {
+  font-family: 'Maellen';
+  src: url('fonts/Maellen.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.font-display {
+  font-family: 'Maellen', 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.font-arabic {
+  font-family: 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+.font-verse-en {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-style: italic;
+}
+.font-body { font-family: 'EB Garamond', Georgia, serif; }
+.tabular { font-variant-numeric: tabular-nums; }
+.label-accent {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+  color: var(--color-accent-deep);
+}
+
+/* ==========================================================================
+   2. HIDDEN SVG SYMBOL SPRITE (2.4 / motifs)
+   ========================================================================== */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ==========================================================================
+   3. LAYOUT PRIMITIVES
+   ========================================================================== */
+.section {
+  position: relative;
+  padding: clamp(2.75rem, 9vw, 5.5rem) clamp(1.25rem, 6vw, 3rem);
+  max-width: 46rem;
+  margin: 0 auto;
+}
+.section--wide { max-width: 56rem; }
+
+.divider {
+  display: block;
+  width: 96px;
+  height: 14px;
+  margin: 1.75rem auto;
+  color: var(--color-accent);
+}
+
+/* corner ornaments — one symbol, reused via mirroring (3.4) */
+.corners { position: absolute; inset: 0; pointer-events: none; }
+.corner { position: absolute; width: 64px; height: 64px; color: var(--color-accent); opacity: .8; }
+.corner-tl { top: 6px; left: 6px; }
+.corner-tr { top: 6px; right: 6px; transform: scaleX(-1); }
+.corner-bl { bottom: 6px; left: 6px; transform: scaleY(-1); }
+.corner-br { bottom: 6px; right: 6px; transform: scale(-1,-1); }
+.corner--hero { width: clamp(96px, 16vw, 150px); height: clamp(96px, 16vw, 150px); opacity: .9; }
+
+@media (min-width: 768px) {
+  .corner { width: 76px; height: 76px; }
+}
+
+/* ==========================================================================
+   4. CURTAIN INTRO (6.1)
+   ========================================================================== */
+.curtain {
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 999;
+  display: flex;
+}
+.curtain.is-open { pointer-events: none; }
+.curtain-panel {
+  position: relative;
+  flex: 1 1 50%;
+  overflow: hidden;
+  transition: transform var(--dur-curtain) var(--ease-out);
+  background: #8a6a3a;
+}
+.curtain-panel svg { width: 100%; height: 100%; }
+.curtain-left  { transform: translateX(0); }
+.curtain-right { transform: translateX(0); }
+.curtain.is-open .curtain-left  { transform: translateX(-102%); }
+.curtain.is-open .curtain-right { transform: translateX(102%); }
+.curtain.is-hidden { visibility: hidden; }
+
+.curtain-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: #FBF3E1;
+  transition: opacity var(--dur-fade) ease;
+}
+.curtain.is-open .curtain-center { opacity: 0; }
+.curtain-bismillah { font-size: clamp(1.75rem, 6vw, 2.75rem); }
+.curtain-hint {
+  margin-top: .9rem;
+  font-size: .85rem;
+  letter-spacing: .04em;
+  color: #EADDBB;
+  opacity: .85;
+}
+
+/* ==========================================================================
+   5. HERO — verse + names (6.2)
+   ========================================================================== */
+.hero { text-align: center; padding-top: clamp(3.5rem, 12vw, 6rem); }
+.hero-verse-ar { font-size: clamp(1.4rem, 5vw, 2rem); line-height: 2; }
+.hero-verse-en { font-size: clamp(1rem, 3vw, 1.2rem); margin-top: .5rem; }
+.hero-verse-cite { font-size: .82rem; color: var(--color-text-muted); margin-top: .35rem; }
+
+.hero-names { margin-top: clamp(2.5rem, 8vw, 4rem); }
+.hero-name-line {
+  font-size: clamp(2.6rem, 11vw, 4.75rem);
+  line-height: 1.15;
+  color: var(--color-text);
+}
+.hero-and {
+  display: block;
+  font-family: 'EB Garamond', serif;
+  font-size: 1.1rem;
+  color: var(--color-accent-deep);
+  margin: .35rem 0;
+}
+.hero-patronymic {
+  font-size: .95rem;
+  color: var(--color-text-muted);
+  margin-top: .15rem;
+}
+.hero-patronymic .ar-inline { font-size: 1.05em; margin: 0 .2em; }
+
+/* ==========================================================================
+   6. CALENDAR (6.3)
+   ========================================================================== */
+.cal-title { text-align: center; }
+.cal-grid {
+  margin-top: 1.75rem;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.cal-dow {
+  text-align: center;
+  font-size: .68rem;
+  color: var(--color-text-muted);
+  font-variant: small-caps;
+  letter-spacing: .03em;
+  padding-bottom: .35rem;
+}
+.cal-cell {
+  position: relative;
+  min-height: 58px;
+  border-radius: 6px;
+  background: var(--color-surface);
+  padding: 4px 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cal-cell.is-empty { background: transparent; }
+.cal-cell.has-event { background: #F1E3C9; box-shadow: inset 0 0 0 1px rgba(201,154,84,.35); }
+.cal-daynum {
+  font-size: .74rem;
+  color: var(--color-text-muted);
+  text-align: right;
+  padding-right: 2px;
+}
+.cal-cell.has-event .cal-daynum { color: var(--color-text); font-weight: 600; }
+.cal-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
+  padding: 6px 2px;
+  border-radius: 4px;
+  background: var(--color-accent);
+  color: #FFFBF2;
+  font-size: .58rem;
+  line-height: 1.15;
+  text-align: center;
+  flex: 1;
+  /* effective tap target padded to 44px even though visually smaller */
+  position: relative;
+}
+.cal-chip::after {
+  content: "";
+  position: absolute;
+  inset: -8px -4px;
+}
+.cal-chip:active, .cal-chip:focus-visible { background: var(--color-accent-deep); outline: 2px solid var(--color-accent-deep); outline-offset: 2px; }
+.cal-chip strong { font-weight: 600; }
+
+@media (min-width: 480px) {
+  .cal-cell { min-height: 68px; }
+  .cal-chip { font-size: .66rem; }
+}
+@media (min-width: 768px) {
+  .cal-cell { min-height: 82px; padding: 6px; }
+  .cal-daynum { font-size: .85rem; }
+  .cal-chip { font-size: .74rem; }
+}
+
+/* ==========================================================================
+   7. COUNTDOWN (shared, used by 6.4 general + each 6.5 ceremony)
+   ========================================================================== */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: clamp(.6rem, 3vw, 1.5rem);
+  margin: 1.5rem 0;
+  flex-wrap: nowrap;
+}
+.countdown-unit { text-align: center; min-width: 3.4rem; }
+.countdown-num {
+  font-size: clamp(1.6rem, 6vw, 2.6rem);
+  color: var(--color-text);
+  display: block;
+}
+.countdown-label {
+  font-size: .62rem;
+  font-variant: small-caps;
+  letter-spacing: .05em;
+  color: var(--color-text-muted);
+  display: block;
+  margin-top: .15rem;
+}
+.countdown-done {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--color-accent-deep);
+  margin: 1.5rem 0;
+}
+
+/* ==========================================================================
+   8. VERSE PANEL (borderless, floating — 3.4)
+   ========================================================================== */
+.verse-panel { text-align: center; margin: 1.75rem auto; max-width: 34rem; }
+.verse-ar { font-size: clamp(1.15rem, 4.4vw, 1.55rem); line-height: 2.1; }
+.verse-en { font-size: clamp(.92rem, 2.6vw, 1.05rem); color: var(--color-text); margin-top: .6rem; }
+.verse-cite { font-size: .78rem; color: var(--color-text-muted); margin-top: .5rem; }
+
+/* ==========================================================================
+   9. LOCATION CARD (6.6)
+   ========================================================================== */
+.location-card {
+  display: block;
+  width: 100%;
+  max-width: 22rem;
+  margin: 1.5rem auto 0;
+  border-radius: 10px;
+  background: var(--color-surface);
+  padding: 1rem 1.1rem;
+  text-align: left;
+  text-decoration: none;
+  transition: background var(--dur-fade) ease;
+}
+.location-card:hover, .location-card:focus-visible { background: #F1E3C9; }
+.location-map-icon { width: 100%; height: 84px; color: var(--color-accent); }
+.location-venue { font-weight: 600; margin-top: .6rem; }
+.location-address { font-size: .88rem; color: var(--color-text-muted); }
+.location-tap-hint { font-size: .72rem; color: var(--color-accent-deep); margin-top: .4rem; font-variant: small-caps; }
+
+/* ==========================================================================
+   10. GENERAL OVERVIEW SECTION (6.4)
+   ========================================================================== */
+.overview-title { text-align: center; }
+
+/* ==========================================================================
+   11. PER-CEREMONY SECTIONS (6.5)
+   ========================================================================== */
+.ceremony {
+  position: relative;
+  text-align: center;
+  background-color: transparent;
+  transition: background-color var(--dur-tint) ease;
+  border-radius: 0;
+}
+.ceremony.in-view { background-color: var(--tint); }
+.ceremony-icon { width: 46px; height: 46px; color: var(--color-accent-deep); margin: 0 auto .5rem; }
+.ceremony-heading { font-size: clamp(2.1rem, 8vw, 3.1rem); }
+.ceremony-subtitle {
+  font-size: .85rem;
+  color: var(--color-text-muted);
+  margin-top: -.35rem;
+  font-family: 'EB Garamond', serif;
+}
+
+/* ==========================================================================
+   12. STICKY NAV (6.7)
+   ========================================================================== */
+.sticky-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translate(-50%, 24px);
+  z-index: 500;
+  display: flex;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 999px;
+  background: rgba(253, 248, 240, .92);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(58,46,42,.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fade) ease, transform var(--dur-fade) ease;
+}
+.sticky-nav.is-visible { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.nav-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  color: var(--color-text-muted);
+}
+.nav-item.is-active { color: var(--color-accent-deep); background: var(--color-surface); }
+.nav-icon { width: 20px; height: 20px; }
+.nav-label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -6px);
+  white-space: nowrap;
+  font-size: .68rem;
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 3px 8px;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-fade) ease;
+}
+.nav-item:hover .nav-label,
+.nav-item:focus-visible .nav-label { opacity: 1; }
+
+@media (min-width: 768px) {
+  .nav-item { width: 48px; height: 48px; }
+}
+
+/* ==========================================================================
+   13. CLOSING NOTE + FOOTER (6.8 / 6.9)
+   ========================================================================== */
+.closing { text-align: center; }
+.closing-text { font-size: 1.05rem; max-width: 30rem; margin: 0 auto; }
+
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem 6.5rem;
+  font-size: .88rem;
+  color: var(--color-text-muted);
+}
+.site-footer a { text-decoration: underline; text-underline-offset: 3px; }
+.site-footer .footer-row { margin: .3rem 0; }
+
+/* focus visibility (quality floor) */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-accent-deep);
+  outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================================================
+     SVG SPRITE — patterns + symbols, referenced everywhere via <use>
+     ========================================================================== -->
+<svg class="sprite" aria-hidden="true">
+<defs>
+
+  <!-- curtain fabric texture: heavier repeating damask-style motif (3.4) -->
+  <pattern id="curtainPattern" width="34" height="46" patternUnits="userSpaceOnUse" patternTransform="scale(1)">
+    <rect width="34" height="46" fill="#8a6a3a"/>
+    <rect width="34" height="46" fill="#000" opacity="0"/>
+    <path d="M17 2 C 24 8, 24 16, 17 23 C 10 16, 10 8, 17 2 Z" fill="#7a5c30" opacity=".55"/>
+    <path d="M17 23 C 24 30, 24 38, 17 45 C 10 38, 10 30, 17 23 Z" fill="#96784a" opacity=".45"/>
+    <line x1="0" y1="0" x2="0" y2="46" stroke="#6d5228" stroke-width="1" opacity=".4"/>
+    <circle cx="17" cy="23" r="2.2" fill="#c9a35c" opacity=".5"/>
+  </pattern>
+
+  <!-- 6.6 decorative "map": stylised road lines + pin, gold-line style -->
+  <symbol id="icon-map" viewBox="0 0 200 90">
+    <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M4 70 C 40 30, 70 85, 110 45 S 170 20, 196 40"/>
+      <path d="M20 10 C 50 40, 40 70, 80 78" opacity=".55"/>
+      <circle cx="112" cy="46" r="2" fill="currentColor" stroke="none"/>
+      <circle cx="150" cy="30" r="2" fill="currentColor" stroke="none"/>
+    </g>
+    <g transform="translate(140,14)">
+      <path d="M0 0 C 10 0 17 7 17 16 C 17 27 0 42 0 42 C 0 42 -17 27 -17 16 C -17 7 -10 0 0 0 Z"
+            fill="none" stroke="currentColor" stroke-width="2.4"/>
+      <circle cx="0" cy="16" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/>
+    </g>
+  </symbol>
+
+  <!-- recurring divider: diamond flanked by short lines (3.4) -->
+  <symbol id="icon-divider" viewBox="0 0 200 24">
+    <g stroke="currentColor" stroke-width="1.4" fill="none">
+      <line x1="0" y1="12" x2="78" y2="12"/>
+      <line x1="122" y1="12" x2="200" y2="12"/>
+      <rect x="93" y="5" width="14" height="14" transform="rotate(45 100 12)"/>
+      <circle cx="100" cy="12" r="1.8" fill="currentColor" stroke="none"/>
+    </g>
+  </symbol>
+
+  <!-- ceremony icons: gold stroke, line-only (3.2) -->
+  <symbol id="icon-milad" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M28 62 C 26 50 34 44 50 44 C 66 44 76 50 74 62 C 73 70 64 74 50 74 C 36 74 29 70 28 62 Z"/>
+      <path d="M28 58 C 16 56 12 62 16 68 C 19 72 26 71 29 66"/>
+      <path d="M50 44 L50 30"/>
+      <path d="M50 30 C 46 24 46 18 50 12 C 54 18 54 24 50 30 Z"/>
+      <line x1="40" y1="74" x2="60" y2="74"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-haldi" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <g>
+        <ellipse cx="50" cy="30" rx="10" ry="16"/>
+        <ellipse cx="50" cy="30" rx="10" ry="16" transform="rotate(72 50 50)"/>
+        <ellipse cx="50" cy="30" rx="10" ry="16" transform="rotate(144 50 50)"/>
+        <ellipse cx="50" cy="30" rx="10" ry="16" transform="rotate(216 50 50)"/>
+        <ellipse cx="50" cy="30" rx="10" ry="16" transform="rotate(288 50 50)"/>
+      </g>
+      <circle cx="50" cy="50" r="6"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-barat" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="50" y1="10" x2="50" y2="20"/>
+      <circle cx="50" cy="25" r="5"/>
+      <path d="M32 34 L68 34 L64 76 L36 76 Z"/>
+      <line x1="36" y1="46" x2="64" y2="46"/>
+      <line x1="36" y1="60" x2="64" y2="60"/>
+      <line x1="50" y1="76" x2="50" y2="86"/>
+      <path d="M46 86 L54 86" />
+    </g>
+  </symbol>
+
+  <symbol id="icon-nikah" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="3">
+      <circle cx="40" cy="55" r="19"/>
+      <circle cx="60" cy="55" r="19"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-walima" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <path d="M50 82 L50 40"/>
+      <path d="M50 82 L34 36"/>
+      <path d="M50 82 L66 36"/>
+      <path d="M50 82 L24 46"/>
+      <path d="M50 82 L76 46"/>
+      <path d="M28 66 L72 66" stroke-width="4"/>
+    </g>
+  </symbol>
+
+  <!-- 3.4 corner ornaments — original arabesque-inspired vine/scroll motifs,
+       drawn from scratch for this project (not traced from any reference).
+       Anchored at the top-left corner; mirrored via CSS transforms elsewhere. -->
+  <symbol id="icon-corner-light" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+      <path d="M2 2 L34 2 M2 2 L2 34"/>
+      <path d="M2 14 C 20 14 22 26 14 30 C 8 33 4 28 8 24 C 11 21 15 23 14 27"/>
+      <path d="M14 2 C 14 16 24 20 30 14 C 34 10 30 6 26 9 C 23 11 25 15 29 14"/>
+      <circle cx="6" cy="6" r="1.4" fill="currentColor" stroke="none"/>
+      <circle cx="20" cy="20" r="1" fill="currentColor" stroke="none"/>
+    </g>
+  </symbol>
+
+  <symbol id="icon-corner-hero" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+      <path d="M2 2 L58 2 M2 2 L2 58"/>
+      <path d="M2 20 C 30 20 34 40 22 46 C 12 51 4 42 12 36 C 18 31 25 35 22 41"/>
+      <path d="M20 2 C 20 26 38 30 46 22 C 52 16 46 8 39 12 C 34 15 37 21 44 20"/>
+      <path d="M2 38 C 46 38 50 6 38 2" opacity=".7"/>
+      <path d="M38 56 C 38 44 50 40 56 46 C 60 50 56 55 51 53" opacity=".8"/>
+      <circle cx="8" cy="8" r="1.8" fill="currentColor" stroke="none"/>
+      <circle cx="30" cy="30" r="1.3" fill="currentColor" stroke="none"/>
+      <circle cx="48" cy="14" r="1.1" fill="currentColor" stroke="none"/>
+      <path d="M50 50 L58 58" stroke-width="1.6"/>
+    </g>
+  </symbol>
+
+</defs>
+</svg>
+
+<!-- ==========================================================================
+     6.1 CURTAIN INTRO
+     ========================================================================== -->
+<div class="curtain" id="curtain">
+  <div class="curtain-panel curtain-left">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect width="100" height="100" fill="url(#curtainPattern)"/></svg>
+  </div>
+  <div class="curtain-panel curtain-right">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect width="100" height="100" fill="url(#curtainPattern)"/></svg>
+  </div>
+  <div class="curtain-center">
+    <div class="curtain-bismillah font-arabic">بِسْمِ اللَّهِ</div>
+    <div class="curtain-hint font-body">scroll or tap to begin</div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     6.2 HERO — verse + names
+     ========================================================================== -->
+<section class="section hero" id="hero">
+  <div class="corners">
+    <svg class="corner corner--hero corner-tl"><use href="#icon-corner-hero"/></svg>
+    <svg class="corner corner--hero corner-tr"><use href="#icon-corner-hero"/></svg>
+    <svg class="corner corner--hero corner-bl"><use href="#icon-corner-hero"/></svg>
+    <svg class="corner corner--hero corner-br"><use href="#icon-corner-hero"/></svg>
+  </div>
+
+  <div class="hero-verse-ar font-arabic">وَخَلَقْنَاكُمْ أَزْوَاجًا</div>
+  <div class="hero-verse-en font-verse-en">"And We created you in pairs."</div>
+  <div class="hero-verse-cite font-body">Surah An-Naba 78:8</div>
+
+  <svg class="divider"><use href="#icon-divider"/></svg>
+
+  <div class="hero-names">
+    <div class="hero-name-line font-display"><!-- [[GROOM_NAME]] -->Imran Siddiqui</div>
+    <span class="hero-and font-body">&amp;</span>
+    <div class="hero-name-line font-display"><!-- [[BRIDE_NAME]] -->Ayesha Rahman</div>
+
+    <p class="hero-patronymic font-body">
+      Imran <span class="ar-inline font-arabic">بن</span> <!-- [[GROOM_FATHER_NAME]] -->Mohammed Siddiqui,
+      &amp; Ayesha <span class="ar-inline font-arabic">بنت</span> <!-- [[BRIDE_FATHER_NAME]] -->Abdul Rahman
+    </p>
+  </div>
+</section>
+
+<!-- ==========================================================================
+     6.3 CALENDAR
+     ========================================================================== -->
+<section class="section" id="calendar">
+  <h2 class="cal-title font-display">Our Celebration</h2>
+  <p class="cal-title font-body" style="color:var(--color-text-muted); font-size:.95rem; margin-top:.25rem;">November 2026</p>
+  <div class="cal-grid" id="calGrid" role="grid" aria-label="November 2026 wedding calendar"></div>
+</section>
+
+<!-- ==========================================================================
+     6.4 GENERAL COUNTDOWN + VERSE + LOCATION
+     ========================================================================== -->
+<section class="section" id="overview">
+  <h2 class="overview-title font-display">Counting the Days</h2>
+  <div class="countdown" id="mainCountdown" data-target-y="2026" data-target-mo="11" data-target-d="22" data-target-h="23" data-target-mi="0">
+    <div class="countdown-unit"><span class="countdown-num tabular" data-unit="d">00</span><span class="countdown-label">days</span></div>
+    <div class="countdown-unit"><span class="countdown-num tabular" data-unit="h">00</span><span class="countdown-label">hrs</span></div>
+    <div class="countdown-unit"><span class="countdown-num tabular" data-unit="m">00</span><span class="countdown-label">min</span></div>
+    <div class="countdown-unit"><span class="countdown-num tabular" data-unit="s">00</span><span class="countdown-label">sec</span></div>
+  </div>
+
+  <svg class="divider"><use href="#icon-divider"/></svg>
+
+  <div class="verse-panel">
+    <div class="verse-ar font-arabic">هُنَّ لِبَاسٌ لَّكُمْ وَأَنتُمْ لِبَاسٌ لَّهُنَّ</div>
+    <div class="verse-en font-verse-en">"They are clothing for you and you are clothing for them."</div>
+    <div class="verse-cite font-body">Surah Al-Baqarah 2:187</div>
+  </div>
+
+  <a class="location-card" id="nikahLocationCard" target="_blank" rel="noopener">
+    <svg class="location-map-icon"><use href="#icon-map"/></svg>
+    <div class="location-venue font-body" id="nikahLocationName"></div>
+    <div class="location-address font-body" id="nikahLocationAddress"></div>
+    <div class="location-tap-hint">tap for directions</div>
+  </a>
+</section>
+
+<!-- ==========================================================================
+     6.5 CEREMONY SECTIONS — rendered by JS from the CEREMONIES array below
+     ========================================================================== -->
+<div id="ceremonies"></div>
+
+<!-- ==========================================================================
+     6.8 CLOSING NOTE
+     ========================================================================== -->
+<section class="section closing" id="closing">
+  <p class="closing-text font-body">
+    Thank you for being part of our story.
+    <!-- [[GROOM_NAME]] / [[BRIDE_NAME]] --> Imran and Ayesha would be so glad to have you
+    with them as they begin this new chapter. We hope to see you there.
+  </p>
+</section>
+
+<!-- ==========================================================================
+     6.9 FOOTER
+     ========================================================================== -->
+<footer class="site-footer font-body">
+  <div class="footer-row">
+    <!-- [[GMAIL_ADDRESS]] -->
+    <a href="mailto:wedding.contact@gmail.com">wedding.contact@gmail.com</a>
+  </div>
+  <div class="footer-row">
+    <!-- [[INSTAGRAM_HANDLE]] shown, [[INSTAGRAM_HANDLE_NO_AT]] used in the URL -->
+    <a href="https://instagram.com/ayesha_and_imran" target="_blank" rel="noopener">@ayesha_and_imran</a>
+  </div>
+</footer>
+
+<!-- ==========================================================================
+     6.7 STICKY NAV
+     ========================================================================== -->
+<nav class="sticky-nav" id="stickyNav" aria-label="Jump to ceremony"></nav>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ------------------------------------------------------------------------
+     0. DATA — every ceremony in one place (Section 4, 5, 8 of the spec)
+     ------------------------------------------------------------------------ */
+  var CEREMONIES = [
+    {
+      id: "milad", label: "Milad", subtitle: null, icon: "icon-milad", tint: "var(--tint-milad)",
+      dateIST: { y: 2026, mo: 11, d: 20, h: 16, mi: 0 },
+      verse: {
+        ar: "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ",
+        en: "O Allah, send blessings upon Muhammad and upon the family of Muhammad.",
+        cite: "A traditional Salawat (blessing upon the Prophet ﷺ)"
+      },
+      venue: { name: "The Rahman Residence", address: "12 Rose Lane, Kolkata", lat: 22.5726, lng: 88.3639 } // [[VENUE_NAME_MILAD]] / [[VENUE_ADDRESS_MILAD]] / [[VENUE_LAT_MILAD]] / [[VENUE_LNG_MILAD]]
+    },
+    {
+      id: "haldi", label: "Haldi", subtitle: null, icon: "icon-haldi", tint: "var(--tint-haldi)",
+      dateIST: { y: 2026, mo: 11, d: 20, h: 19, mi: 0 },
+      verse: {
+        ar: "بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
+        en: "May Allah bless you, shower His blessings upon you, and bring you together in goodness.",
+        cite: "A supplication of the Prophet ﷺ for newlyweds"
+      },
+      venue: { name: "The Rahman Residence", address: "12 Rose Lane, Kolkata", lat: 22.5726, lng: 88.3639 } // [[VENUE_NAME_HALDI]] / [[VENUE_ADDRESS_HALDI]] / [[VENUE_LAT_HALDI]] / [[VENUE_LNG_HALDI]]
+    },
+    {
+      id: "barat", label: "Barat", subtitle: "the groom's procession", icon: "icon-barat", tint: "var(--tint-barat)",
+      dateIST: { y: 2026, mo: 11, d: 22, h: 20, mi: 0 },
+      verse: {
+        ar: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        en: "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
+        cite: "Surah Al-Baqarah 2:201"
+      },
+      venue: { name: "The Siddiqui Residence", address: "45 Garden Road, Kolkata", lat: 22.5448, lng: 88.3426 } // [[VENUE_NAME_BARAT]] / [[VENUE_ADDRESS_BARAT]] / [[VENUE_LAT_BARAT]] / [[VENUE_LNG_BARAT]]
+    },
+    {
+      id: "nikah", label: "Nikah", subtitle: null, icon: "icon-nikah", tint: "var(--tint-nikah)",
+      dateIST: { y: 2026, mo: 11, d: 22, h: 23, mi: 0 },
+      verse: {
+        ar: "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ",
+        en: "And of His signs is that He created for you from yourselves mates that you may find tranquillity in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought.",
+        cite: "Surah Ar-Rum 30:21"
+      },
+      venue: { name: "The Siddiqui Residence", address: "45 Garden Road, Kolkata", lat: 22.5448, lng: 88.3426 } // [[VENUE_NAME_NIKAH]] / [[VENUE_ADDRESS_NIKAH]] / [[VENUE_LAT_NIKAH]] / [[VENUE_LNG_NIKAH]]
+    },
+    {
+      id: "walima", label: "Walima", subtitle: null, icon: "icon-walima", tint: "var(--tint-walima)",
+      dateIST: { y: 2026, mo: 11, d: 25, h: 20, mi: 0 },
+      verse: {
+        ar: "لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ",
+        en: "If you are grateful, I will surely increase you [in favor].",
+        cite: "Surah Ibrahim 14:7"
+      },
+      venue: { name: "Grand Celebration Hall", address: "8 Lakeview Avenue, Kolkata", lat: 22.5626, lng: 88.3529 } // [[VENUE_NAME_WALIMA]] / [[VENUE_ADDRESS_WALIMA]] / [[VENUE_LAT_WALIMA]] / [[VENUE_LNG_WALIMA]]
+    }
+  ];
+
+  /* ------------------------------------------------------------------------
+     1. TIME HELPERS — always anchored to Asia/Kolkata (UTC+5:30), never
+        the visitor's local timezone.
+     ------------------------------------------------------------------------ */
+  var IST_OFFSET_MS = 5.5 * 60 * 60 * 1000;
+
+  function istToUTCms(dateIST) {
+    return Date.UTC(dateIST.y, dateIST.mo - 1, dateIST.d, dateIST.h, dateIST.mi) - IST_OFFSET_MS;
+  }
+
+  function formatTime12h(h, mi) {
+    var period = h >= 12 ? "PM" : "AM";
+    var h12 = h % 12; if (h12 === 0) h12 = 12;
+    return h12 + (mi ? ":" + String(mi).padStart(2, "0") : "") + " " + period;
+  }
+
+  /* ------------------------------------------------------------------------
+     2. SMOOTH SCROLL — native where supported, rAF fallback for older Safari
+     ------------------------------------------------------------------------ */
+  var supportsNativeSmoothScroll = ("scrollBehavior" in document.documentElement.style) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function scrollToId(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced) { el.scrollIntoView(); return; }
+    if (supportsNativeSmoothScroll) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    // JS fallback (older Safari without native smooth scroll-behavior)
+    var startY = window.pageYOffset;
+    var targetY = el.getBoundingClientRect().top + startY - 8;
+    var distance = targetY - startY;
+    var duration = 600;
+    var startTime = null;
+    function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+    function step(ts) {
+      if (startTime === null) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      window.scrollTo(0, startY + distance * easeInOutQuad(progress));
+      if (progress < 1) window.requestAnimationFrame(step);
+    }
+    window.requestAnimationFrame(step);
+  }
+
+  /* ------------------------------------------------------------------------
+     3. CURTAIN INTRO (6.1)
+     ------------------------------------------------------------------------ */
+  (function initCurtain() {
+    var curtain = document.getElementById("curtain");
+    var opened = false;
+
+    function openCurtain() {
+      if (opened) return;
+      opened = true;
+      document.body.style.overflow = "";
+      curtain.classList.add("is-open");
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var delay = reduced ? 0 : 800;
+      window.setTimeout(function () { curtain.classList.add("is-hidden"); }, delay);
+      window.removeEventListener("wheel", openCurtain);
+      window.removeEventListener("touchmove", openCurtain);
+      window.removeEventListener("keydown", onKey);
+    }
+    function onKey(e) {
+      if (["ArrowDown", "PageDown", " ", "End"].indexOf(e.key) !== -1) openCurtain();
+    }
+
+    document.body.style.overflow = "hidden";
+    curtain.addEventListener("click", openCurtain);
+    window.addEventListener("wheel", openCurtain, { passive: true });
+    window.addEventListener("touchmove", openCurtain, { passive: true });
+    window.addEventListener("keydown", onKey);
+  })();
+
+  /* ------------------------------------------------------------------------
+     4. CALENDAR GRID (6.3) — computed, not hardcoded
+     ------------------------------------------------------------------------ */
+  (function renderCalendar() {
+    var YEAR = 2026, MONTH = 11; // November
+    var grid = document.getElementById("calGrid");
+    var dowNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+    var firstWeekday = new Date(Date.UTC(YEAR, MONTH - 1, 1)).getUTCDay();
+    var daysInMonth = new Date(Date.UTC(YEAR, MONTH, 0)).getUTCDate();
+
+    // map day-of-month -> list of ceremonies happening that day
+    var byDay = {};
+    CEREMONIES.forEach(function (c) {
+      if (c.dateIST.y === YEAR && c.dateIST.mo === MONTH) {
+        (byDay[c.dateIST.d] = byDay[c.dateIST.d] || []).push(c);
+      }
+    });
+    Object.keys(byDay).forEach(function (d) {
+      byDay[d].sort(function (a, b) { return a.dateIST.h - b.dateIST.h; });
+    });
+
+    var html = "";
+    dowNames.forEach(function (n) { html += '<div class="cal-dow">' + n + "</div>"; });
+    for (var i = 0; i < firstWeekday; i++) html += '<div class="cal-cell is-empty"></div>';
+
+    for (var day = 1; day <= daysInMonth; day++) {
+      var events = byDay[day];
+      var cls = "cal-cell" + (events ? " has-event" : "");
+      html += '<div class="' + cls + '">';
+      html += '<div class="cal-daynum">' + day + "</div>";
+      if (events) {
+        events.forEach(function (c) {
+          html += '<button type="button" class="cal-chip" data-target="' + c.id + '" aria-label="' + c.label + " on " + MONTH + "/" + day + " at " + formatTime12h(c.dateIST.h, c.dateIST.mi) + '">' +
+            "<strong>" + c.label + "</strong><span>" + formatTime12h(c.dateIST.h, 0) + "</span></button>";
+        });
+      }
+      html += "</div>";
+    }
+    grid.innerHTML = html;
+
+    grid.addEventListener("click", function (e) {
+      var chip = e.target.closest(".cal-chip");
+      if (chip) scrollToId(chip.getAttribute("data-target"));
+    });
+  })();
+
+  /* ------------------------------------------------------------------------
+     5. CEREMONY SECTIONS — one parameterized template, instantiated 5x (6.5)
+     ------------------------------------------------------------------------ */
+  function ceremonySectionHTML(c) {
+    var targetMs = istToUTCms(c.dateIST);
+    return (
+      '<section class="section ceremony" id="' + c.id + '" style="--tint:' + c.tint + '" data-tint-section>' +
+        '<div class="corners">' +
+          '<svg class="corner corner-tl"><use href="#icon-corner-light"/></svg>' +
+          '<svg class="corner corner-tr"><use href="#icon-corner-light"/></svg>' +
+          '<svg class="corner corner-bl"><use href="#icon-corner-light"/></svg>' +
+          '<svg class="corner corner-br"><use href="#icon-corner-light"/></svg>' +
+        "</div>" +
+        '<svg class="ceremony-icon"><use href="#' + c.icon + '"/></svg>' +
+        '<h2 class="ceremony-heading font-display">' + c.label + "</h2>" +
+        (c.subtitle ? '<p class="ceremony-subtitle font-body">' + c.subtitle + "</p>" : "") +
+        '<div class="countdown" data-countdown-target="' + targetMs + '">' +
+          '<div class="countdown-unit"><span class="countdown-num tabular" data-unit="d">00</span><span class="countdown-label">days</span></div>' +
+          '<div class="countdown-unit"><span class="countdown-num tabular" data-unit="h">00</span><span class="countdown-label">hrs</span></div>' +
+          '<div class="countdown-unit"><span class="countdown-num tabular" data-unit="m">00</span><span class="countdown-label">min</span></div>' +
+          '<div class="countdown-unit"><span class="countdown-num tabular" data-unit="s">00</span><span class="countdown-label">sec</span></div>' +
+        "</div>" +
+        '<svg class="divider"><use href="#icon-divider"/></svg>' +
+        '<div class="verse-panel">' +
+          '<div class="verse-ar font-arabic">' + c.verse.ar + "</div>" +
+          '<div class="verse-en font-verse-en">"' + c.verse.en + '"</div>' +
+          '<div class="verse-cite font-body">' + c.verse.cite + "</div>" +
+        "</div>" +
+        '<a class="location-card" target="_blank" rel="noopener" href="https://maps.google.com/?q=' + c.venue.lat + "," + c.venue.lng + '">' +
+          '<svg class="location-map-icon"><use href="#icon-map"/></svg>' +
+          '<div class="location-venue font-body">' + c.venue.name + "</div>" +
+          '<div class="location-address font-body">' + c.venue.address + "</div>" +
+          '<div class="location-tap-hint">tap for directions</div>' +
+        "</a>" +
+      "</section>"
+    );
+  }
+
+  document.getElementById("ceremonies").innerHTML = CEREMONIES.map(ceremonySectionHTML).join("");
+
+  /* fill in the Nikah location card in the general overview section (6.4) */
+  (function fillOverviewLocation() {
+    var nikah = CEREMONIES.filter(function (c) { return c.id === "nikah"; })[0];
+    document.getElementById("nikahLocationName").textContent = nikah.venue.name;
+    document.getElementById("nikahLocationAddress").textContent = nikah.venue.address;
+    document.getElementById("nikahLocationCard").href = "https://maps.google.com/?q=" + nikah.venue.lat + "," + nikah.venue.lng;
+  })();
+
+  /* ------------------------------------------------------------------------
+     6. COUNTDOWNS — the general one + all 5 ceremony ones, each independent
+     ------------------------------------------------------------------------ */
+  (function initCountdowns() {
+    var mainEl = document.getElementById("mainCountdown");
+    var mainNikah = CEREMONIES.filter(function (c) { return c.id === "nikah"; })[0];
+    mainEl.setAttribute("data-countdown-target", istToUTCms(mainNikah.dateIST));
+
+    function tick() {
+      document.querySelectorAll("[data-countdown-target]").forEach(function (block) {
+        var target = Number(block.getAttribute("data-countdown-target"));
+        var diff = target - Date.now();
+        if (diff <= 0) {
+          block.querySelectorAll(".countdown-num").forEach(function (n) { n.textContent = "00"; });
+          return;
+        }
+        var s = Math.floor(diff / 1000);
+        var d = Math.floor(s / 86400); s -= d * 86400;
+        var h = Math.floor(s / 3600); s -= h * 3600;
+        var m = Math.floor(s / 60); s -= m * 60;
+        var vals = { d: d, h: h, m: m, s: s };
+        block.querySelectorAll(".countdown-num").forEach(function (n) {
+          var unit = n.getAttribute("data-unit");
+          n.textContent = String(vals[unit]).padStart(2, "0");
+        });
+      });
+    }
+    tick();
+    window.setInterval(tick, 1000);
+  })();
+
+  /* ------------------------------------------------------------------------
+     7. STICKY NAV (6.7) — built from the same CEREMONIES data
+     ------------------------------------------------------------------------ */
+  var stickyNav = document.getElementById("stickyNav");
+  stickyNav.innerHTML = CEREMONIES.map(function (c) {
+    return '<button type="button" class="nav-item" data-target="' + c.id + '" aria-label="Jump to ' + c.label + '">' +
+      '<svg class="nav-icon"><use href="#' + c.icon + '"/></svg>' +
+      '<span class="nav-label">' + c.label + "</span>" +
+    "</button>";
+  }).join("");
+  stickyNav.addEventListener("click", function (e) {
+    var item = e.target.closest(".nav-item");
+    if (item) scrollToId(item.getAttribute("data-target"));
+  });
+
+  /* ------------------------------------------------------------------------
+     8. INTERSECTION OBSERVERS — tint transitions + nav visibility/highlight
+     ------------------------------------------------------------------------ */
+  (function initObservers() {
+    // a) show the sticky nav once the calendar section has been reached
+    var calendarSection = document.getElementById("calendar");
+    var navObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var pastOrAtCalendar = entry.isIntersecting || entry.boundingClientRect.top < 0;
+        stickyNav.classList.toggle("is-visible", pastOrAtCalendar);
+      });
+    }, { threshold: 0 });
+    navObserver.observe(calendarSection);
+
+    // b) per-ceremony tint wash + nav active state
+    var ceremonySections = Array.prototype.slice.call(document.querySelectorAll(".ceremony"));
+    var tintObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        entry.target.classList.toggle("in-view", entry.isIntersecting);
+        if (entry.isIntersecting) {
+          var id = entry.target.id;
+          document.querySelectorAll(".nav-item").forEach(function (item) {
+            item.classList.toggle("is-active", item.getAttribute("data-target") === id);
+          });
+        }
+      });
+    }, { threshold: 0.45 });
+    ceremonySections.forEach(function (s) { tintObserver.observe(s); });
+  })();
+
+})();
+</script>
+</body>
+</html>
