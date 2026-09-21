@@ -24,7 +24,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
 <style>
 /* ==========================================================================
@@ -101,6 +101,11 @@ body {
 }
 .font-arabic {
   font-family: 'Noto Naskh Arabic', 'Traditional Arabic', serif;
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+.font-nastaliq {
+  font-family: 'Noto Nastaliq Urdu', 'Traditional Arabic', serif;
   direction: rtl;
   unicode-bidi: isolate;
 }
@@ -191,6 +196,18 @@ body {
 }
 .curtain.is-open .curtain-center { opacity: 0; }
 .curtain-bismillah { font-size: clamp(1.75rem, 6vw, 2.75rem); }
+.curtain-host {
+  display: inline-block;
+  margin: 1.1rem 0 .15rem;
+  padding: .4rem 1.15rem;
+  border: 1px solid rgba(234,221,187,.55);
+  border-radius: 999px;
+  background: rgba(0,0,0,.2);
+  color: #F5E9CE;
+  font-size: 0.95.rem;
+  font-variant: small-caps;
+  letter-spacing: .04em;
+}
 .curtain-hint {
   margin-top: .9rem;
   font-size: .85rem;
@@ -206,6 +223,13 @@ body {
 .hero-verse-ar { font-size: clamp(1.4rem, 5vw, 2rem); line-height: 2; }
 .hero-verse-en { font-size: clamp(1rem, 3vw, 1.2rem); margin-top: .5rem; }
 .hero-verse-cite { font-size: .82rem; color: var(--color-text-muted); margin-top: .35rem; }
+.hero-welcome {
+  margin-top: 1.75rem;
+  font-size: 1.15rem;
+  color: var(--color-text-muted);
+  font-variant: small-caps;
+  letter-spacing: .02em;
+}
 
 .hero-names { margin-top: clamp(2.5rem, 8vw, 4rem); }
 .hero-name-line {
@@ -221,7 +245,7 @@ body {
   margin: .35rem 0;
 }
 .hero-patronymic {
-  font-size: .95rem;
+  font-size: 1.15rem;
   color: var(--color-text-muted);
   margin-top: .15rem;
 }
@@ -330,6 +354,13 @@ body {
   font-size: 1.3rem;
   color: var(--color-accent-deep);
   margin: 1.5rem 0;
+}
+
+.ceremony-datetime {
+  text-align: center;
+  font-size: .85rem;
+  color: var(--color-text-muted);
+  margin-top: -.5rem;
 }
 
 /* ==========================================================================
@@ -461,10 +492,40 @@ a:focus-visible, button:focus-visible {
   outline: 2px solid var(--color-accent-deep);
   outline-offset: 2px;
 }
+
+.closing-toggle {
+  display: inline-block;
+  margin: 0 auto 2rem;
+  padding: .45rem 1.3rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-accent-deep);
+  font-family: 'EB Garamond', serif;
+  font-size: .85rem;
+  font-variant: small-caps;
+  letter-spacing: .03em;
+}
+.closing-toggle:hover, .closing-toggle:focus-visible { background: #F1E3C9; }
+.closing-urdu {
+  font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', serif;
+  direction: rtl;
+  font-size: clamp(1.15rem, 4vw, 1.4rem);
+  line-height: 2.6;
+  max-width: 30rem;
+  margin: 0 auto 1.4rem;
+}
+.closing-signoff {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin-top: 1rem;
+}
 </style>
 </head>
 <body>
 
+  
 <!-- ==========================================================================
      SVG SPRITE — patterns + symbols, referenced everywhere via <use>
      ========================================================================== -->
@@ -602,6 +663,14 @@ a:focus-visible, button:focus-visible {
     </g>
   </symbol>
 
+  <symbol id="icon-whatsapp" viewBox="0 0 100 100">
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M50 18 C 30 18 16 32 16 50 C 16 57 18 63 22 68 L18 84 L35 80 C 40 83 45 84 50 84 C 70 84 84 70 84 50 C 84 32 70 18 50 18 Z"/>
+    <path d="M36 46 C 36 60 42 66 56 66"/>
+    <path d="M36 46 C 36 43 38 40 40 40 C 42 40 43 43 43 45 C 43 47 41 48 41 50 C 41 52 44 55 47 57"/>
+    <path d="M56 66 C 58 66 61 65 61 63 C 61 61 60 59 58 58 C 56 57 54 59 52 59 C 50 59 48 58 47 57"/>
+  </g>
+</symbol>
 </defs>
 </svg>
 
@@ -617,6 +686,7 @@ a:focus-visible, button:focus-visible {
   </div>
   <div class="curtain-center">
     <div class="curtain-bismillah font-arabic">بِسْمِ اللَّهِ</div>
+    <div class="curtain-host font-body">With the blessings of Mr. &amp; Mrs. Md Salim Mallick</div>
     <div class="curtain-hint font-body">scroll or tap to begin</div>
   </div>
 </div>
@@ -637,6 +707,8 @@ a:focus-visible, button:focus-visible {
   <div class="hero-verse-cite font-body">Surah An-Naba 78:8</div>
 
   <svg class="divider"><use href="#icon-divider"/></svg>
+
+  <p class="hero-welcome font-body">We are honored to welcome you to the wedding ceremony of</p>
 
     <div class="hero-names">
     <div class="hero-name-line font-display"><!-- [[GROOM_NAME]] -->Mohammed Faiz Ahmed</div>
@@ -672,6 +744,8 @@ a:focus-visible, button:focus-visible {
     <div class="countdown-unit"><span class="countdown-num tabular" data-unit="s">00</span><span class="countdown-label">sec</span></div>
   </div>
 
+  <p class="ceremony-datetime font-body" id="mainCountdownDate"></p>
+
   <svg class="divider"><use href="#icon-divider"/></svg>
 
   <div class="verse-panel">
@@ -697,26 +771,26 @@ a:focus-visible, button:focus-visible {
      6.8 CLOSING NOTE
      ========================================================================== -->
 <section class="section closing" id="closing">
-  <p class="closing-text font-body">
-    Thank you for being such an important part of our story. Every family gathering, every
-    quiet conversation, and every shared meal along the way has helped shape who
-    <!-- [[GROOM_NAME]] -->Mohammed Faiz Ahmed and <!-- [[BRIDE_NAME]] -->Saniya Mallick are today — and this journey
-    wouldn't feel complete without the people who matter most standing beside them now.
-  </p>
-  <p class="closing-text font-body">
-    As they take this next step together, they carry with them the love, laughter, and duas of
-    everyone who has walked alongside them. Whether you've known them since childhood or have
-    only recently come to be part of their lives, your presence at each of these celebrations
-    means more than words can say.
-  </p>
-  <p class="closing-text font-body">
-    So come as you are, stay a while, share a meal, and celebrate with us — dance if you'd like
-    to, pray if you'd like to, and most of all, be glad with us, because we are so glad to have
-    you here.
-  </p>
-  <p class="closing-text font-body" style="font-style:italic; color:var(--color-text-muted);">
-    With love and gratitude, <!-- [[GROOM_NAME]] -->Mohammed Faiz Ahmed &amp; <!-- [[BRIDE_NAME]] -->Saniya Mallick
-  </p>
+  <div class="corners">
+    <svg class="corner corner-tl"><use href="#icon-corner-light"/></svg>
+    <svg class="corner corner-tr"><use href="#icon-corner-light"/></svg>
+  </div>
+
+  <button type="button" class="closing-toggle" id="closingToggle">Translate</button>
+
+  <div id="closingUrdu">
+    <p class="closing-urdu">ہماری کہانی کا اتنا اہم حصہ بننے کے لیے آپ کا شکریہ۔ ہر خاندانی محفل، ہر خاموش گفتگو، اور راستے میں ہر ساتھ کھایا گیا کھانا — ان سب نے محمد فیض احمد اور سانیا ملک کو آج جو کچھ وہ ہیں بنانے میں مدد کی ہے۔ اور یہ سفر ان لوگوں کے بغیر مکمل محسوس نہیں ہوگا جو آج ان کے ساتھ کھڑے ہیں۔</p>
+    <p class="closing-urdu">جب وہ مل کر یہ اگلا قدم اٹھا رہے ہیں، تو وہ ہر اس شخص کی محبت، ہنسی اور دعائیں ساتھ لے کر چل رہے ہیں جو ان کے ساتھ رہا ہے۔ چاہے آپ انہیں بچپن سے جانتے ہوں یا حال ہی میں ان کی زندگی کا حصہ بنے ہوں، ان تمام تقریبات میں آپ کی موجودگی الفاظ سے کہیں زیادہ معنی رکھتی ہے۔</p>
+    <p class="closing-urdu">تو جیسے بھی ہیں تشریف لائیں، کچھ وقت ہمارے ساتھ گزاریں، اور ہماری خوشی میں شریک ہوں — اور سب سے بڑھ کر، ہمارے لیے دعا کے لیے ہاتھ اٹھائیں۔ یہی سب سے سچا تحفہ ہوگا جو آپ ہمیں دے سکتے ہیں۔</p>
+    <p class="closing-urdu closing-signoff"></p>
+  </div>
+
+  <div id="closingEnglish" hidden>
+    <p class="closing-text font-body">Thank you for being such an important part of our story. Every family gathering, every quiet conversation, and every shared meal along the way has helped shape who Mohammed Faiz Ahmed and Saniya Mallick are today — and this journey wouldn't feel complete without the people who matter most standing beside them now.</p>
+    <p class="closing-text font-body">As they take this next step together, they carry with them the love, laughter, and duas of everyone who has walked alongside them. Whether you've known them since childhood or have only recently come to be part of their lives, your presence at each of these celebrations means more than words can say.</p>
+    <p class="closing-text font-body">So come as you are, stay a while, and share in our joy — and above all, raise your hands in dua for us. That is the truest gift you could give.</p>
+    <p class="closing-text font-body closing-signoff">With love and gratitude, Mohammed Faiz Ahmed &amp; Saniya Mallick</p>
+  </div>
 </section>
 <!-- ==========================================================================
      6.9 FOOTER
@@ -733,6 +807,11 @@ a:focus-visible, button:focus-visible {
       <svg class="nav-icon" style="width:22px;height:22px;"><use href="#icon-camera"/></svg>
       <span class="nav-label">Instagram</span>
     </a>
+    <!-- [[WHATSAPP_NUMBER]] with country code, digits only, e.g. 919876543210 -->
+<a class="nav-item" href="https://wa.me/[[916291404672]]" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg class="nav-icon" style="width:22px;height:22px;"><use href="#icon-whatsapp"/></svg>
+  <span class="nav-label">WhatsApp</span>
+</a>
   </div>
 </footer>
 
@@ -757,7 +836,7 @@ a:focus-visible, button:focus-visible {
         en: "O Allah, send blessings upon Muhammad and upon the family of Muhammad.",
         cite: "A traditional Salawat (blessing upon the Prophet ﷺ)"
       },
-      venue: { name: "The Mallicks' Residence", address: "Nawada, Bihar", lat: 22.5726, lng: 88.3639 } // [[VENUE_NAME_MILAD]] / [[VENUE_ADDRESS_MILAD]] / [[VENUE_LAT_MILAD]] / [[VENUE_LNG_MILAD]]
+      venue: { name: "The Shamims' Residence", address: "Nawada, Bihar", lat: 24.8192560, lng: 85.6231214 } // [[VENUE_NAME_MILAD]] / [[VENUE_ADDRESS_MILAD]] / [[VENUE_LAT_MILAD]] / [[VENUE_LNG_MILAD]]
     },
     {
       id: "haldi", label: "Haldi", subtitle: null, icon: "icon-haldi", tint: "var(--tint-haldi)",
@@ -767,7 +846,7 @@ a:focus-visible, button:focus-visible {
         en: "May Allah bless you, shower His blessings upon you, and bring you together in goodness.",
         cite: "A supplication of the Prophet ﷺ for newlyweds"
       },
-      venue: { name: "The Mallicks' Residence", address: "Nawada, Bihar", lat: 22.5726, lng: 88.3639 } // [[VENUE_NAME_HALDI]] / [[VENUE_ADDRESS_HALDI]] / [[VENUE_LAT_HALDI]] / [[VENUE_LNG_HALDI]]
+      venue: { name: "The Shamims' Residence", address: "Nawada, Bihar", lat: 24.8192560, lng: 85.6231214 } // [[VENUE_NAME_HALDI]] / [[VENUE_ADDRESS_HALDI]] / [[VENUE_LAT_HALDI]] / [[VENUE_LNG_HALDI]]
     },
     {
       id: "barat", label: "Barat", subtitle: "the groom's procession", icon: "icon-barat", tint: "var(--tint-barat)",
@@ -777,7 +856,7 @@ a:focus-visible, button:focus-visible {
         en: "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
         cite: "Surah Al-Baqarah 2:201"
       },
-      venue: { name: "The Sahood's Residence", address: "Nawada, Bihar", lat: 22.5448, lng: 88.3426 } // [[VENUE_NAME_BARAT]] / [[VENUE_ADDRESS_BARAT]] / [[VENUE_LAT_BARAT]] / [[VENUE_LNG_BARAT]]
+      venue: { name: "The Mallicks' Residence", address: "Bhatbigha, Bihar", lat: 24.7383836, lng: 85.5502897 } // [[VENUE_NAME_BARAT]] / [[VENUE_ADDRESS_BARAT]] / [[VENUE_LAT_BARAT]] / [[VENUE_LNG_BARAT]]
     },
     {
       id: "nikah", label: "Nikah", subtitle: null, icon: "icon-nikah", tint: "var(--tint-nikah)",
@@ -787,7 +866,7 @@ a:focus-visible, button:focus-visible {
         en: "And of His signs is that He created for you from yourselves mates that you may find tranquillity in them; and He placed between you affection and mercy. Indeed in that are signs for a people who give thought.",
         cite: "Surah Ar-Rum 30:21"
       },
-      venue: { name: "The Sahood's Residence", address: "Nawada, Bihar", lat: 22.5448, lng: 88.3426 } // [[VENUE_NAME_NIKAH]] / [[VENUE_ADDRESS_NIKAH]] / [[VENUE_LAT_NIKAH]] / [[VENUE_LNG_NIKAH]]
+      venue: { name: "The Mallicks' Residence", address: "Bhatbigha, Bihar", lat: 24.7383836, lng: 85.5502897 } // [[VENUE_NAME_NIKAH]] / [[VENUE_ADDRESS_NIKAH]] / [[VENUE_LAT_NIKAH]] / [[VENUE_LNG_NIKAH]]
     },
     {
       id: "walima", label: "Walima", subtitle: null, icon: "icon-walima", tint: "var(--tint-walima)",
@@ -797,7 +876,7 @@ a:focus-visible, button:focus-visible {
         en: "If you are grateful, I will surely increase you [in favor].",
         cite: "Surah Ibrahim 14:7"
       },
-      venue: { name: "The Mallicks' Residence", address: "Nawada, Bihar", lat: 22.5626, lng: 88.3529 } // [[VENUE_NAME_WALIMA]] / [[VENUE_ADDRESS_WALIMA]] / [[VENUE_LAT_WALIMA]] / [[VENUE_LNG_WALIMA]]
+      venue: { name: "The Shamims' Residence", address: "Nawada, Bihar", lat: 24.8192560, lng: 85.6231214 } // [[VENUE_NAME_WALIMA]] / [[VENUE_ADDRESS_WALIMA]] / [[VENUE_LAT_WALIMA]] / [[VENUE_LNG_WALIMA]]
     }
   ];
 
@@ -816,6 +895,18 @@ a:focus-visible, button:focus-visible {
     var h12 = h % 12; if (h12 === 0) h12 = 12;
     return h12 + (mi ? ":" + String(mi).padStart(2, "0") : "") + " " + period;
   }
+
+  var MONTH_NAMES = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+function ordinal(n) {
+  var s = ["th", "st", "nd", "rd"], v = n % 100;
+  return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+function dateTimeLabel(dateIST) {
+  var period = dateIST.h >= 12 ? "PM" : "AM";
+  var h12 = dateIST.h % 12; if (h12 === 0) h12 = 12;
+  var time = h12 + ":" + String(dateIST.mi).padStart(2, "0") + " " + period;
+  return "Date- " + ordinal(dateIST.d) + " " + MONTH_NAMES[dateIST.mo - 1] + " " + dateIST.y + ", Time- " + time;
+}
 
   /* ------------------------------------------------------------------------
      2. SMOOTH SCROLL — native where supported, rAF fallback for older Safari
@@ -936,7 +1027,7 @@ a:focus-visible, button:focus-visible {
           '<svg class="corner corner-tr"><use href="#icon-corner-light"/></svg>' +
           '<svg class="corner corner-bl"><use href="#icon-corner-light"/></svg>' +
           '<svg class="corner corner-br"><use href="#icon-corner-light"/></svg>' +
-        "</div>" +
+        "</div>" + 
         '<svg class="ceremony-icon"><use href="#' + c.icon + '"/></svg>' +
         '<h2 class="ceremony-heading font-display">' + c.label + "</h2>" +
         (c.subtitle ? '<p class="ceremony-subtitle font-body">' + c.subtitle + "</p>" : "") +
@@ -945,7 +1036,7 @@ a:focus-visible, button:focus-visible {
           '<div class="countdown-unit"><span class="countdown-num tabular" data-unit="h">00</span><span class="countdown-label">hrs</span></div>' +
           '<div class="countdown-unit"><span class="countdown-num tabular" data-unit="m">00</span><span class="countdown-label">min</span></div>' +
           '<div class="countdown-unit"><span class="countdown-num tabular" data-unit="s">00</span><span class="countdown-label">sec</span></div>' +
-        "</div>" +
+        "</div>" + '<p class="ceremony-datetime font-body">' + dateTimeLabel(c.dateIST) + "</p>" +
         '<svg class="divider"><use href="#icon-divider"/></svg>' +
         '<div class="verse-panel">' +
           '<div class="verse-ar font-arabic">' + c.verse.ar + "</div>" +
@@ -970,6 +1061,7 @@ a:focus-visible, button:focus-visible {
     document.getElementById("nikahLocationName").textContent = nikah.venue.name;
     document.getElementById("nikahLocationAddress").textContent = nikah.venue.address;
     document.getElementById("nikahLocationCard").href = "https://maps.google.com/?q=" + nikah.venue.lat + "," + nikah.venue.lng;
+    document.getElementById("mainCountdownDate").textContent = dateTimeLabel(nikah.dateIST);
   })();
 
   /* ------------------------------------------------------------------------
@@ -1047,6 +1139,18 @@ a:focus-visible, button:focus-visible {
     }, { threshold: 0.45 });
     ceremonySections.forEach(function (s) { tintObserver.observe(s); });
   })();
+(function initClosingToggle() {
+  var toggleBtn = document.getElementById("closingToggle");
+  var urduBlock = document.getElementById("closingUrdu");
+  var enBlock = document.getElementById("closingEnglish");
+  var showingEnglish = false;
+  toggleBtn.addEventListener("click", function () {
+    showingEnglish = !showingEnglish;
+    urduBlock.hidden = showingEnglish;
+    enBlock.hidden = !showingEnglish;
+    toggleBtn.textContent = showingEnglish ? "اردو" : "Translate";
+  });
+})();
 
 })();
 </script>
